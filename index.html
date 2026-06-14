@@ -564,21 +564,21 @@
       font-size:2rem;
     }
   }
+  
   /* Делаем фото услуг идеально круглыми */
-.service-icon {
-    width: 103px;           /* Ширина круга (можно сделать больше или меньше, например 100px или 150px) */
-    height: 103px;          /* Высота круга (должна быть точно такой же, как ширина!) */
-    object-fit: cover;      /* Сверхважное свойство: фото не сожмется и не растянется, а красиво впишется в круг */
-    border-radius: 50%;     /* Магия: превращает квадрат в идеальный круг */
-    margin-bottom: 15px;    /* Отступ снизу от фото до названия услуги */
-    border: 3px solid #eee; /* Симпатичная тонкая серая рамочка вокруг круга */
-  margin-top: 20px;
-}
+  .service-icon {
+    width: 103px;
+    height: 103px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 3px solid #eee;
+    margin-top: 20px;
+  }
 </style>
 </head>
 <body>
 
-  <!-- ===================== HEADER ===================== -->
   <header class="header">
     <div class="header__inner">
       <div class="logo">
@@ -598,7 +598,6 @@
     </div>
   </header>
 
-  <!-- ===================== HERO ===================== -->
   <section class="hero">
     <div class="hero__inner">
       <h1>Терміновий виклик сантехніка. Приїзд за 45 хвилин!</h1>
@@ -642,15 +641,18 @@
         </div>
       </div>
 
-      <form class="hero__form" onsubmit="event.preventDefault(); alert('Дякуємо! Майстер скоро з вами зв’яжеться.');">
-        <input class="hero__input" type="tel" placeholder="+38 (___) ___-____" required>
+      <form class="hero__form" id="tg-form">
+        <input class="hero__input" type="tel" id="tg-phone" placeholder="+38 (___) ___-____" required>
         <button type="submit" class="btn btn--main">Викликати майстра</button>
         <a href="https://t.me/santehnik24rivne" class="btn btn--ghost">Написати у Telegram </a>
       </form>
+      
+      <div id="tg-success" style="display: none; color: #fff; background: rgba(47,147,161,0.2); border: 2px solid var(--teal); padding: 18px; border-radius: var(--radius-pill); text-align: center; font-weight: 700; margin-top: 15px;">
+        ✓ Заявку прийнято! Майстер зателефонує вам протягом 5 хвилин.
+      </div>
     </div>
   </section>
 
-  <!-- ===================== SERVICES ===================== -->
   <section class="section services" id="services">
     <h2 class="section__title">Ціни на послуги сантехніка</h2>
     <p class="section__subtitle">Фіксована вартість виклику, без прихованих платежів</p>
@@ -696,7 +698,6 @@
     </div>
   </section>
 
-  <!-- ===================== ADVANTAGES ===================== -->
   <section class="section advantages" id="advantages">
     <h2 class="section__title">Чому обирають нас</h2>
     <p class="section__subtitle">Працюємо чесно та відповідаємо за результат</p>
@@ -713,7 +714,7 @@
           </svg>
         </span>
         <h3>Безкоштовний виїзд</h3>
-        <p>Майстер приїде на діагностику без жодної оплати, незалежно від складності проблеми.</p>
+        <p>Майстер приїде на діагностику без жодної оплати, незалежно від складності проблему.</p>
       </div>
 
       <div class="advantage-card">
@@ -734,14 +735,13 @@
             <line x1="6" y1="15" x2="10" y2="15"></line>
           </svg>
         </span>
-        <h3>Оплата після виконання</h3>
+        <h3>Оплата после виконання</h3>
         <p>Розрахунок лише після того, як ви переконаєтесь, що проблему повністю усунено.</p>
       </div>
 
     </div>
   </section>
 
-  <!-- ===================== REVIEWS ===================== -->
   <section class="section reviews" id="reviews">
     <h2 class="section__title">Відгуки клієнтів</h2>
     <p class="reviews__stats">На сайті <b>748</b> відгуків · Середня оцінка <b>4.9</b></p>
@@ -778,16 +778,14 @@
     </div>
   </section>
 
-  <!-- ===================== CTA STRIP ===================== -->
   <section class="cta-strip">
     <h2>Потрібен сантехнік прямо зараз?</h2>
     <p>Залиште номер телефону — і ми зателефонуємо протягом 5 хвилин</p>
-    <form onsubmit="event.preventDefault(); alert('Дякуємо! Ми скоро вам зателефонуємо.');">
+    <form onsubmit="event.preventDefault(); document.getElementById('tg-form').scrollIntoView({behavior: 'smooth'});">
       <button type="submit" class="btn btn--main">Викликати майстра</button>
     </form>
   </section>
 
-  <!-- ===================== FOOTER ===================== -->
   <footer class="footer">
     <div class="footer__inner">
 
@@ -835,6 +833,49 @@
       © 2026 Сантехнік24. Усі права захищено.
     </div>
   </footer>
+
+  <script>
+    // ВСТАВЬТЕ СВОИ ДАННЫЕ МЕЖДУ КАВЫЧКАМИ
+    const TOKEN = "8404742219:AAGzegwk4r9V2aQg4hzGeoeud0AzS7th8gg"; 
+    const CHAT_ID = "904342126";
+    const URL_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+
+    document.getElementById('tg-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const phoneInput = document.getElementById('tg-phone').value;
+
+        // Формируем сообщение
+        let message = `<b>🚀 НОВА ЗАЯВКА З САЙТУ!</b>\n`;
+        message += `<b>📞 Телефон:</b> ${phoneInput}`;
+
+        // Отправка данных в телеграм-бот
+        fetch(URL_API, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                chat_id: CHAT_ID,
+                parse_mode: 'html',
+                text: message
+            })
+        })
+        .then(response => {
+            if (response.ok) {
+                // Прячем форму и показываем текст успешного заказа
+                document.getElementById('tg-form').style.display = 'none';
+                document.getElementById('tg-success').style.display = 'block';
+            } else {
+                alert('Помилка відправки. Спробуйте ще раз або зателефонуйте майстру.');
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            alert('Помилка мережі. Перевірте з’єднання.');
+        });
+    });
+  </script>
 
 </body>
 </html>
