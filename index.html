@@ -641,7 +641,7 @@
       </div>
 
       <form class="hero__form" id="tg-form">
-        <input class="hero__input" type="tel" id="tg-phone" placeholder="+38 (___) ___-____" required>
+        <input class="hero__input" type="tel" id="tg-phone" placeholder="+38 (___) ___-____" pattern="\+38 \(\d{3}\) \d{3}-\d{4}" title="Будь ласка, введіть повний номер телефону у форматі +38 (0XX) XXX-XXXX" required>
         <button type="submit" class="btn btn--main">Викликати майстра</button>
         <a href="https://t.me/santehnik24rivne" class="btn btn--ghost">Написати у Telegram </a>
       </form>
@@ -838,14 +838,34 @@
     const CHAT_ID = "904342126";
     const URL_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
 
+    // Интерактивная маска для красивого и правильного ввода телефона
+    const phoneInput = document.getElementById('tg-phone');
+    
+    phoneInput.addEventListener('input', function() {
+        const matrix = "+38 (___) ___-____";
+        let i = 0;
+        const def = matrix.replace(/\D/g, "");
+        let val = this.value.replace(/\D/g, "");
+        if (def.length >= val.length) val = def;
+        this.value = matrix.replace(/./g, function(a) {
+            return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? "" : a;
+        });
+    });
+
+    phoneInput.addEventListener('blur', function() {
+        if (this.value === "+38 (") {
+            this.value = "";
+        }
+    });
+
     document.getElementById('tg-form').addEventListener('submit', function(e) {
         e.preventDefault();
 
-        const phoneInput = document.getElementById('tg-phone').value;
+        const phoneInputValue = document.getElementById('tg-phone').value;
 
         // Формируем сообщение
-        let message = `<b>🚀 НОВА ЗАЯВКА З САЙТУ!</b>\n`;
-        message += `<b>📞 Телефон:</b> ${phoneInput}`;
+        let message = `<b></b>\n`;
+        message += `<b></b> ${phoneInputValue}`;
 
         // Отправка данных в телеграм-бот
         fetch(URL_API, {
