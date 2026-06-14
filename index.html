@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сантехнік24 — Виклик сантехніка з приїздом за 45 хвилин</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --dark:#2b2b2b;
+    --dark-soft:#333333;
+    --yellow:#f7c531;
+    --yellow-soft:#fff4d6;
+    --teal:#2f93a1;
+    --teal-dark:#267e8a;
+    --gray:#8a8a8a;
+    --light-bg:#f6f6f6;
+    --card-bg:#ffffff;
+    --shadow: 0 6px 18px rgba(0,0,0,0.08);
+    --radius-lg: 18px;
+    --radius-pill: 50px;
+  }
+
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+  }
+
+  html{
+    scroll-behavior:smooth;
+  }
+
+  body{
+    font-family:'Nunito', 'Segoe UI', Tahoma, sans-serif;
+    color:var(--dark);
+    background:var(--light-bg);
+    line-height:1.5;
+  }
+
+  a{
+    color:inherit;
+    text-decoration:none;
+  }
+
+  img, svg{
+    display:block;
+  }
+
+  /* ===================== HEADER ===================== */
+  .header{
+    background:#fff;
+    border-bottom:4px solid var(--yellow);
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+
+  .header__inner{
+    max-width:1100px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 20px;
+    gap:12px;
+  }
+
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:800;
+    font-size:1.15rem;
+    color:var(--dark);
+    white-space:nowrap;
+  }
+
+  .logo__icon{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:var(--yellow);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+
+  .header__phone{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:var(--teal);
+    font-weight:800;
+    font-size:1.05rem;
+    white-space:nowrap;
+  }
+
+  /* ===================== HERO ===================== */
+  .hero{
+    background:linear-gradient(180deg, var(--dark) 0%, #3a3a3a 100%);
+    color:#fff;
+    padding:48px 20px 56px;
+  }
+
+  .hero__inner{
+    max-width:600px;
+    margin:0 auto;
+    text-align:center;
+  }
+
+  .hero h1{
+    font-size:1.85rem;
+    font-weight:800;
+    line-height:1.25;
+    margin-bottom:14px;
+  }
+
+  .hero__desc{
+    color:#cfcfcf;
+    font-size:1rem;
+    max-width:480px;
+    margin:0 auto 14px;
+  }
+
+  .hero__price{
+    color:var(--yellow);
+    font-weight:800;
+    font-size:1.4rem;
+    margin-bottom:26px;
+  }
+
+  .hero__features{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    align-items:flex-start;
+    max-width:340px;
+    margin:0 auto 32px;
+  }
+
+  .hero__feature{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    font-size:1.02rem;
+    color:#f1f1f1;
+  }
+
+  .hero__feature .icon-circle{
+    width:36px;
+    height:36px;
+    flex-shrink:0;
+  }
+
+  .hero__form{
+    max-width:340px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .hero__input{
+    width:100%;
+    padding:16px 22px;
+    border-radius:var(--radius-pill);
+    border:none;
+    font-size:1.05rem;
+    font-family:inherit;
+    font-weight:700;
+    color:var(--dark);
+    text-align:center;
+    outline:none;
+  }
+
+  .hero__input::placeholder{
+    color:#a8a8a8;
+  }
+
+  .btn{
+    display:inline-block;
+    border:none;
+    cursor:pointer;
+    font-family:inherit;
+    font-weight:800;
+    font-size:1.05rem;
+    border-radius:var(--radius-pill);
+    padding:16px 28px;
+    transition:transform .15s ease, background .2s ease, box-shadow .2s ease;
+    text-align:center;
+  }
+
+  .btn--main{
+    background:var(--teal);
+    color:#fff;
+    width:100%;
+    box-shadow:0 8px 20px rgba(47,147,161,0.35);
+  }
+
+  .btn--main:hover{
+    background:var(--teal-dark);
+    transform:translateY(-1px);
+  }
+
+  .btn--ghost{
+    background:transparent;
+    color:#fff;
+    border:2px solid var(--yellow);
+    margin-top:8px;
+  }
+
+  .btn--ghost:hover{
+    background:rgba(247,197,49,0.12);
+  }
+
+  /* ===================== SECTIONS GENERAL ===================== */
+  .section{
+    max-width:1100px;
+    margin:0 auto;
+    padding:48px 20px;
+  }
+
+  .section__title{
+    font-size:1.6rem;
+    font-weight:800;
+    color:var(--dark);
+    text-align:center;
+    margin-bottom:8px;
+  }
+
+  .section__subtitle{
+    text-align:center;
+    color:var(--gray);
+    font-size:0.98rem;
+    margin-bottom:32px;
+  }
+
+  /* ===================== SERVICES ===================== */
+  .services{
+    background:#fff;
+  }
+
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:16px;
+  }
+
+  .service-card{
+    background:var(--card-bg);
+    border:1px solid #eee;
+    border-radius:var(--radius-lg);
+    padding:22px 16px;
+    text-align:center;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+  }
+
+  .service-card__icon{
+    width:64px;
+    height:64px;
+    border-radius:50%;
+    background:var(--yellow-soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:6px;
+  }
+
+  .service-card__title{
+    font-weight:800;
+    font-size:1rem;
+    min-height:44px;
+    display:flex;
+    align-items:center;
+    text-align:center;
+  }
+
+  .service-card__price{
+    color:var(--gray);
+    font-size:0.95rem;
+    margin-bottom:6px;
+  }
+
+  .service-card__price b{
+    color:var(--dark);
+  }
+
+  .btn--small{
+    font-size:0.92rem;
+    padding:12px 18px;
+    width:100%;
+  }
+
+  /* ===================== ADVANTAGES ===================== */
+  .advantages{
+    background:var(--light-bg);
+  }
+
+  .advantages-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+
+  .advantage-card{
+    background:#fff;
+    border-radius:var(--radius-lg);
+    padding:24px;
+    text-align:center;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+  }
+
+  .advantage-card .icon-circle{
+    width:56px;
+    height:56px;
+    background:var(--yellow-soft);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .advantage-card h3{
+    font-size:1.08rem;
+    font-weight:800;
+  }
+
+  .advantage-card p{
+    color:var(--gray);
+    font-size:0.92rem;
+  }
+
+  /* ===================== REVIEWS ===================== */
+  .reviews{
+    background:#fff;
+  }
+
+  .reviews__stats{
+    text-align:center;
+    margin-bottom:28px;
+    color:var(--gray);
+    font-size:0.98rem;
+  }
+
+  .reviews__stats b{
+    color:var(--dark);
+  }
+
+  .reviews-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+
+  .review-card{
+    background:var(--light-bg);
+    border-radius:var(--radius-lg);
+    padding:20px;
+  }
+
+  .review-card__head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:6px;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+
+  .review-card__name{
+    font-weight:800;
+  }
+
+  .review-card__date{
+    color:var(--gray);
+    font-size:0.85rem;
+  }
+
+  .review-card__stars{
+    color:var(--yellow);
+    letter-spacing:2px;
+    margin-bottom:8px;
+  }
+
+  .review-card__text{
+    color:#555;
+    font-size:0.95rem;
+    font-style:italic;
+  }
+
+  /* ===================== CTA STRIP ===================== */
+  .cta-strip{
+    background:linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    color:#fff;
+    text-align:center;
+    padding:40px 20px;
+  }
+
+  .cta-strip h2{
+    font-size:1.5rem;
+    font-weight:800;
+    margin-bottom:8px;
+  }
+
+  .cta-strip p{
+    color:#e6f5f7;
+    margin-bottom:22px;
+    font-size:0.98rem;
+  }
+
+  .cta-strip .btn--main{
+    background:var(--yellow);
+    color:var(--dark);
+    max-width:320px;
+    margin:0 auto;
+    box-shadow:0 8px 20px rgba(0,0,0,0.18);
+  }
+
+  .cta-strip .btn--main:hover{
+    background:#ffd64d;
+  }
+
+  /* ===================== FOOTER ===================== */
+  .footer{
+    background:var(--dark);
+    color:#cfcfcf;
+    padding:44px 20px 24px;
+  }
+
+  .footer__inner{
+    max-width:1100px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:32px;
+  }
+
+  .footer__col h4{
+    color:#fff;
+    font-size:1.05rem;
+    font-weight:800;
+    margin-bottom:14px;
+  }
+
+  .footer__col p, .footer__col a{
+    display:block;
+    color:#bdbdbd;
+    font-size:0.95rem;
+    margin-bottom:8px;
+  }
+
+  .footer__phone{
+    color:var(--yellow) !important;
+    font-weight:800;
+    font-size:1.15rem !important;
+  }
+
+  .footer__messengers{
+    display:flex;
+    gap:12px;
+    margin-top:14px;
+  }
+
+  .messenger-link{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#3d3d3d;
+    border-radius:var(--radius-pill);
+    padding:10px 18px;
+    font-weight:700;
+    font-size:0.9rem;
+    color:#fff;
+    transition:background .2s ease;
+  }
+
+  .messenger-link:hover{
+    background:var(--teal);
+  }
+
+  .footer__bottom{
+    border-top:1px solid #444;
+    margin-top:32px;
+    padding-top:18px;
+    text-align:center;
+    font-size:0.85rem;
+    color:#888;
+  }
+
+  /* ===================== ICONS BASE ===================== */
+  .icon-circle svg{
+    width:60%;
+    height:60%;
+  }
+
+  /* ===================== DESKTOP ===================== */
+  @media (min-width: 768px){
+
+    .hero{
+      padding:72px 20px 84px;
+    }
+
+    .hero__inner{
+      max-width:760px;
+    }
+
+    .hero h1{
+      font-size:2.6rem;
+    }
+
+    .hero__desc{
+      font-size:1.1rem;
+    }
+
+    .hero__price{
+      font-size:1.7rem;
+    }
+
+    .hero__features{
+      max-width:420px;
+    }
+
+    .hero__form{
+      max-width:420px;
+    }
+
+    .section{
+      padding:72px 20px;
+    }
+
+    .section__title{
+      font-size:2.1rem;
+    }
+
+    .services-grid{
+      grid-template-columns:repeat(4, 1fr);
+    }
+
+    .advantages-grid{
+      grid-template-columns:repeat(3, 1fr);
+    }
+
+    .reviews-grid{
+      grid-template-columns:repeat(3, 1fr);
+    }
+
+    .footer__inner{
+      grid-template-columns:repeat(3, 1fr);
+    }
+
+    .cta-strip h2{
+      font-size:2rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="header">
+    <div class="header__inner">
+      <div class="logo">
+        <span class="logo__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2b2b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+          </svg>
+        </span>
+        Сантехнік24
+      </div>
+      <a href="tel:+380685172747" class="header__phone">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+        </svg>
+        (068) 517-27-47
+      </a>
+    </div>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="hero__inner">
+      <h1>Терміновий виклик сантехніка. Приїзд за 45 хвилин!</h1>
+      <p class="hero__desc">
+        Усунення засмічень, заміна змішувачів, ремонт унітазів та монтаж бойлерів.
+        Працюємо щодня, без вихідних, по Києву та області.
+      </p>
+      <p class="hero__price">від 350 грн</p>
+
+      <div class="hero__features">
+        <div class="hero__feature">
+          <span class="icon-circle" style="width:36px;height:36px;background:transparent;display:flex;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%">
+              <rect x="1" y="6" width="13" height="10" rx="1"></rect>
+              <path d="M14 9h4l3 3v4h-7z"></path>
+              <circle cx="6" cy="18" r="2"></circle>
+              <circle cx="17" cy="18" r="2"></circle>
+            </svg>
+          </span>
+          Безкоштовний виїзд майстра
+        </div>
+        <div class="hero__feature">
+          <span class="icon-circle" style="width:36px;height:36px;background:transparent;display:flex;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%">
+              <circle cx="12" cy="12" r="9"></circle>
+              <path d="M12 7v5l3 2"></path>
+            </svg>
+          </span>
+          Приїзд протягом 45 хвилин
+        </div>
+        <div class="hero__feature">
+          <span class="icon-circle" style="width:36px;height:36px;background:transparent;display:flex;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="100%" height="100%">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <path d="M14 2v6h6"></path>
+              <line x1="9" y1="13" x2="15" y2="13"></line>
+              <line x1="9" y1="17" x2="13" y2="17"></line>
+            </svg>
+          </span>
+          Гарантія на роботи до 2 років
+        </div>
+      </div>
+
+      <form class="hero__form" onsubmit="event.preventDefault(); alert('Дякуємо! Майстер скоро з вами зв’яжеться.');">
+        <input class="hero__input" type="tel" placeholder="+38 (___) ___-____" required>
+        <button type="submit" class="btn btn--main">Викликати майстра</button>
+        <a href="https://t.me/" class="btn btn--ghost">Написати у Telegram / Viber</a>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===================== SERVICES ===================== -->
+  <section class="section services" id="services">
+    <h2 class="section__title">Ціни на послуги сантехніка</h2>
+    <p class="section__subtitle">Фіксована вартість виклику, без прихованих платежів</p>
+
+    <div class="services-grid">
+
+      <div class="service-card">
+        <span class="service-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="60%" height="60%">
+            <path d="M12 22c4-4 7-7.5 7-11a7 7 0 1 0-14 0c0 3.5 3 7 7 11z"></path>
+            <path d="M9.5 11l2 2 3-4"></path>
+          </svg>
+        </span>
+        <div class="service-card__title">Усунення засмічень</div>
+        <div class="service-card__price">Ціна від <b>350 грн</b></div>
+        <button class="btn btn--main btn--small">Викликати майстра</button>
+      </div>
+
+      <div class="service-card">
+        <span class="service-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="60%" height="60%">
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            <rect x="4" y="11" width="16" height="9" rx="2"></rect>
+            <line x1="12" y1="15" x2="12" y2="17"></line>
+          </svg>
+        </span>
+        <div class="service-card__title">Встановлення змішувача</div>
+        <div class="service-card__price">Ціна від <b>400 грн</b></div>
+        <button class="btn btn--main btn--small">Викликати майстра</button>
+      </div>
+
+      <div class="service-card">
+        <span class="service-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="60%" height="60%">
+            <path d="M4 12h16"></path>
+            <path d="M5 12V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v5"></path>
+            <path d="M4 12v5a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-5"></path>
+            <line x1="9" y1="20" x2="9" y2="22"></line>
+            <line x1="15" y1="20" x2="15" y2="22"></line>
+          </svg>
+        </span>
+        <div class="service-card__title">Ремонт унітаза</div>
+        <div class="service-card__price">Ціна від <b>450 грн</b></div>
+        <button class="btn btn--main btn--small">Викликати майстра</button>
+      </div>
+
+      <div class="service-card">
+        <span class="service-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="60%" height="60%">
+            <rect x="5" y="3" width="14" height="18" rx="3"></rect>
+            <path d="M9 8h6"></path>
+            <path d="M9 12h6"></path>
+            <path d="M12 16v3"></path>
+          </svg>
+        </span>
+        <div class="service-card__title">Монтаж бойлера</div>
+        <div class="service-card__price">Ціна від <b>800 грн</b></div>
+        <button class="btn btn--main btn--small">Викликати майстра</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== ADVANTAGES ===================== -->
+  <section class="section advantages" id="advantages">
+    <h2 class="section__title">Чому обирають нас</h2>
+    <p class="section__subtitle">Працюємо чесно та відповідаємо за результат</p>
+
+    <div class="advantages-grid">
+
+      <div class="advantage-card">
+        <span class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="60%" height="60%">
+            <rect x="1" y="6" width="13" height="10" rx="1"></rect>
+            <path d="M14 9h4l3 3v4h-7z"></path>
+            <circle cx="6" cy="18" r="2"></circle>
+            <circle cx="17" cy="18" r="2"></circle>
+          </svg>
+        </span>
+        <h3>Безкоштовний виїзд</h3>
+        <p>Майстер приїде на діагностику без жодної оплати, незалежно від складності проблеми.</p>
+      </div>
+
+      <div class="advantage-card">
+        <span class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="60%" height="60%">
+            <path d="M12 2l2.5 5 5.5.8-4 4 1 5.5L12 15l-5 2.3 1-5.5-4-4 5.5-.8z"></path>
+          </svg>
+        </span>
+        <h3>Гарантія на роботу</h3>
+        <p>Надаємо письмову гарантію на виконані роботи та встановлені запчастини до 2 років.</p>
+      </div>
+
+      <div class="advantage-card">
+        <span class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="60%" height="60%">
+            <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+            <line x1="2" y1="10" x2="22" y2="10"></line>
+            <line x1="6" y1="15" x2="10" y2="15"></line>
+          </svg>
+        </span>
+        <h3>Оплата після виконання</h3>
+        <p>Розрахунок лише після того, як ви переконаєтесь, що проблему повністю усунено.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== REVIEWS ===================== -->
+  <section class="section reviews" id="reviews">
+    <h2 class="section__title">Відгуки клієнтів</h2>
+    <p class="reviews__stats">На сайті <b>1369</b> відгуків · Середня оцінка <b>4.8</b></p>
+
+    <div class="reviews-grid">
+
+      <div class="review-card">
+        <div class="review-card__head">
+          <span class="review-card__name">Ігор</span>
+          <span class="review-card__date">25 травня 2026</span>
+        </div>
+        <div class="review-card__stars">★★★★★</div>
+        <p class="review-card__text">Дуже швидко приїхали, проблему вирішили за 20 хвилин. Дякую!</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-card__head">
+          <span class="review-card__name">Михайло</span>
+          <span class="review-card__date">24 травня 2026</span>
+        </div>
+        <div class="review-card__stars">★★★★★</div>
+        <p class="review-card__text">Величезна подяка майстру Георгію! Був ввічливим, акуратним і пояснив, як надалі краще доглядати за сантехнікою.</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-card__head">
+          <span class="review-card__name">Ірина</span>
+          <span class="review-card__date">22 травня 2026</span>
+        </div>
+        <div class="review-card__stars">★★★★★</div>
+        <p class="review-card__text">Замінили змішувач за годину, ціна відповідала тій, що озвучили по телефону. Рекомендую.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== CTA STRIP ===================== -->
+  <section class="cta-strip">
+    <h2>Потрібен сантехнік прямо зараз?</h2>
+    <p>Залиште номер телефону — і ми зателефонуємо протягом 5 хвилин</p>
+    <form onsubmit="event.preventDefault(); alert('Дякуємо! Ми скоро вам зателефонуємо.');">
+      <button type="submit" class="btn btn--main">Викликати майстра</button>
+    </form>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="footer__inner">
+
+      <div class="footer__col">
+        <h4>Контакти</h4>
+        <a href="tel:+380685172747" class="footer__phone">(068) 517-27-47</a>
+        <p>Київ та область</p>
+        <p>Виїзд по всьому місту</p>
+      </div>
+
+      <div class="footer__col">
+        <h4>Графік роботи</h4>
+        <p>Працюємо 24/7</p>
+        <p>Без вихідних і свят</p>
+        <p>Виїзд протягом 45 хвилин</p>
+      </div>
+
+      <div class="footer__col">
+        <h4>Зв'язатися з майстром</h4>
+        <div class="footer__messengers">
+          <a href="https://t.me/" class="messenger-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.5 8.5 0 1 1-4.5-7.5L21 2l-1.5 5.5z"></path>
+              <path d="M8 12h8"></path>
+            </svg>
+            Telegram
+          </a>
+          <a href="https://wa.me/" class="messenger-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-9 8.4 8.5 8.5 0 0 1-4-1L3 21l1.3-3.9a8.38 8.38 0 0 1-1-4A8.5 8.5 0 1 1 21 11.5z"></path>
+            </svg>
+            WhatsApp
+          </a>
+          <a href="viber://chat" class="messenger-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            Viber
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <div class="footer__bottom">
+      © 2026 Сантехнік24. Усі права захищено.
+    </div>
+  </footer>
+
+</body>
+</html>
