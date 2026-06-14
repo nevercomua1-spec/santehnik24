@@ -564,6 +564,15 @@
       font-size:2rem;
     }
   }
+  /* Делаем фото услуг идеально круглыми */
+.service-icon {
+    width: 120px;           /* Ширина круга (можно сделать больше или меньше, например 100px или 150px) */
+    height: 120px;          /* Высота круга (должна быть точно такой же, как ширина!) */
+    object-fit: cover;      /* Сверхважное свойство: фото не сожмется и не растянется, а красиво впишется в круг */
+    border-radius: 50%;     /* Магия: превращает квадрат в идеальный круг */
+    margin-bottom: 15px;    /* Отступ снизу от фото до названия услуги */
+    border: 3px solid #eee; /* Симпатичная тонкая серая рамочка вокруг круга */
+}
 </style>
 </head>
 <body>
@@ -661,11 +670,7 @@
 
       <div class="service-card">
         <span class="service-card__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="60%" height="60%">
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-            <rect x="4" y="11" width="16" height="9" rx="2"></rect>
-            <line x1="12" y1="15" x2="12" y2="17"></line>
-          </svg>
+          <img src="posluga1.jpg" alt="Ремонт унітаза" class="service-icon">
         </span>
         <div class="service-card__title">Встановлення змішувача</div>
         <div class="service-card__price">Ціна від <b>700 грн</b></div>
